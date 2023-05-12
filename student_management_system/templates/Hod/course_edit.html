@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<!DOCTYPE html>
+<html lang="en">
+   <!-- Mirrored from preschool.dreamguystech.com/html-template/add-student.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:50 GMT -->
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <!-- <h3 class="page-title">Add Courses</h3> -->
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <form method="POST" action="{% url 'update_course' course.id %}">
+                              <!-- here enctype is mustinshould withod that  attribute we cannot gat decode the image from the database -->
+                              {% csrf_token %}
+                                <div class="col-12">
+                                <h5 class="form-title"><span>Add Course</span></h5>
+                                </div>
+                                 {% include 'includes/messages.html'%}
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="">Course Name</label>
+                                        <input type="text" class="form-control" name="course_name" value="{{course.name}}">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Update Course</button>
+                                 </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+</html>
+
+{% endblock %}

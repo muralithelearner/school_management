@@ -1,0 +1,81 @@
+{ load static }
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+       <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+             <li class="menu-title">
+                <span>Main Menu</span>
+             </li>
+
+             <a href="{% url 'hod/home'%}"><i class="fas fa-holly-berry"></i> <span>Dashboard</span></a>
+
+             <!-- <li class="submenu active">
+                <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+                <ul>
+                   <li><a href="index.html" class="active">Admin Dashboard</a></li>
+                   <li><a href="teacher-dashboard.html">Teacher Dashboard</a></li>
+                   <li><a href="student-dashboard.html">Student Dashboard</a></li>
+                </ul>
+             </li> -->
+             <li class="submenu">
+                <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                <ul>
+                   <li><a href="{% url 'add_student' %}">Add Student</a></li>
+                   <li><a href="{% url 'views_student' %}">View Student</a></li>
+                   <!-- <li><a href="edit-student.html">Edit Student</a></li> -->
+                </ul>
+             </li>
+             <li class="submenu">
+                <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Staff</span> <span class="menu-arrow"></span></a>
+                <ul>
+                   <li><a href="teacher-details.html">Staff View</a></li>
+                   <li><a href="add-teacher.html">Staff Add</a></li>
+                   <li><a href="edit-teacher.html">Staff Edit</a></li>
+                </ul>
+             </li>
+             <li class="submenu">
+                <a href="#"><i class="fa fa-graduation-cap"></i> <span> Course</span> <span class="menu-arrow"></span></a>
+                <ul>
+                   <li><a href="{% url 'add_course'%}">Add Course</a></li>
+                   <li><a href="{% url 'course_view' %}">View Course</a></li>
+                </ul>
+             </li>
+             <li class="submenu">
+                <a href="#"><i class="fas fa-book-reader"></i> <span> Subjects</span> <span class="menu-arrow"></span></a>
+                <ul>
+                   <li><a href="subjects.html">Subject List</a></li>
+                   <li><a href="add-subject.html">Subject Add</a></li>
+                   <li><a href="edit-subject.html">Subject Edit</a></li>
+                </ul>
+             </li>
+             <li class="submenu">
+               <a href="#"><i class="fas fa-calendar-alt"></i> <span> Session</span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="subjects.html">Session List</a></li>
+                  <li><a href="add-subject.html">Session Add</a></li>
+                  <li><a href="edit-subject.html">Session Edit</a></li>
+               </ul>
+            </li>
+             <li >
+               <a href="sports.html"><i class="	far fa-clock"></i><span>View Attendence</span></a>
+             </li>
+             <li>
+               <a href="sports.html"><i class="fa fa-comments"></i><span>Staff Feedback</span></a>
+             </li>
+             <li>
+               <a href="holiday.html"><i class="fa fa-comments"></i> <span>Student Feedback</span></a>
+             </li>
+             <li>
+               <a href="holiday.html"><i class="fas fa-envelope"></i> <span>Staff Leave </span></a>
+             </li>
+             <li>
+               <a href="holiday.html"><i class="fas fa-envelope"></i></i> <span>Student Leave</span></a>
+             </li>
+             <li>
+               <a href="{% url 'doLogout' %}"><i class="fas fa-sign-out-alt"></i></i> <span>Logout</span></a>
+             </li>
+
+       </div>
+    </div>
+ </div>
+ <div>
