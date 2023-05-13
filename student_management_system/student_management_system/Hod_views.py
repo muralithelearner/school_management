@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from app.models import Courses,Session_Year,CustomUser,Student
+from app.models import Courses,Session_Year,CustomUser,Student,Staff
 from django.contrib import messages
 
 
@@ -196,4 +196,104 @@ def UPDATE_COURSE(request,id):
 #             'course': course
 #         }
 #         return render(request, 'Hod/course_edit.html', context)
+ 
+def COURSE_DELETE(request,id):
+    course =Courses.objects.get(id=id)
+    course.delete()
+    return redirect('course_view')
 
+def ADD_STAFF(request):
+    if request.method =='POST':
+        profile_pic =request.FILES.get('profile_pic')
+        first_name =request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        username=request.POST.get('username')
+        email = request.POST.get('email')
+        password =request.POST.get('password')
+        adress=request.POST.get('adress')
+        gender =request.POST.get('gender') 
+
+        if CustomUser.objects.filter(username=username).exists():
+            messages.warning(request,'Email is already taken')
+            return redirect(ADD_STAFF)
+        
+        if CustomUser.objects.filter(email = email).exists():
+            messages.warning(request,'email is already taken')
+        else:
+            user = CustomUser(
+                profile_pic =profile_pic,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                username=username,
+                user_type= 2
+            )
+            user.set_password(password)
+            user.save()
+            
+            staff=Staff(
+                admin=user,
+                adress=adress, 
+                gender=gender,
+            )
+            staff.save()
+            messages.success(request,'staf are succefully added')
+            return redirect('add_staff')
+            # return redirect(VIEWS_STAFF)
+
+    return render(request,'Hod/add_staff.html')
+
+def VIEWS_STAFF(request):
+    staff =Staff.objects.all()
+
+    context ={
+        'staff' : staff
+    }
+    return render(request,'Hod/staff_views.html',context)
+
+def EDIT_STAFF(request,id):
+    staff = Staff.objects.get(id = id)
+    context ={
+        'staff' : staff
+    }
+    return render(request,'Hod/edit_staff.html',context)
+
+def UPDATE_STAFF(request):
+    if request.method =='POST':
+        staff_id=request.POST.get('staff_id')
+        profile_pic = request.POST.get('profile_pic')
+        first_name=request.POST.get('first_name')
+        last_name=request.POSt.get('last_name')
+        email=request.POST.get('email')
+        username =request.POST.get('username')
+        password=request.POST.get('password')
+        adress=request.POST.get('password')
+        gender=request.POST.get('gender')
+
+        user = CustomUser.objects.get(id=staff_id)
+        user.first_name=first_name
+        user.last_name=last_name
+        user.email=email
+        user.username=username
+
+        if profile_pic != None and profile_pic !="":
+            user.profile_pic=profile_pic
+
+        if password != None and password != '':
+            user.set_password(password)
+            user.save()
+
+        staff =Staff.objects.get(admin = staff_id)
+        staff.adress=adress
+        staff.gender=gender
+        staff.save()
+        messages.success(request,'update succefully')
+        return redirect(VIEWS_STAFF)
+
+    return render(request,'Hod/edit_staff.html')
+
+def HOD_VIEWS(request,admin):
+    staff = CustomUser.objects.get(id=admin)
+    staff.delete()
+    messages.warning(request,'staff succefully delete')
+    return redirect(VIEWS_STAFF)

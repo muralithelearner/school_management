@@ -43,11 +43,20 @@ urlpatterns = [
     path('hod/student/edit/<str:id>',Hod_views.EDIT_STUDENT,name='edit_student'),
     path('hod/student/update',Hod_views.UPDATE_STUDENT,name='update_student'),
     path('hod/student/delete/<str:admin>',Hod_views.DELETE_STUDENT,name='student_delete'),
+
+
+    path('hod/staff/add',Hod_views.ADD_STAFF,name='add_staff'),
+    path('hod/staff/views',Hod_views.VIEWS_STAFF,name="views_staff"),
+    path('hod/staff/edit/<str:id>',Hod_views.EDIT_STAFF,name="edit_staff"),
+    path('hod/staff/update',Hod_views.UPDATE_STAFF,name='update_staff'),
+    path('hod/staff/delete/<str:admin>',Hod_views.HOD_VIEWS,name='staff_delete'),
+
     path('hod/course/add_course',Hod_views.ADD_COURSE,name='add_course'),
     path('hod/course/view',Hod_views.COURSE_VIEW,name='course_view'),
     path('hod/course/edit/<str:id>',Hod_views.EIDT_COURSE,name='edit_course'),
     # path('hod/course/update/',Hod_views.UPDATE_COURSE,name='update_course'),
-    path('hod/course/update/<int:id>/',Hod_views.UPDATE_COURSE,name='update_course')
+    path('hod/course/update/<int:id>/',Hod_views.UPDATE_COURSE,name='update_course'),
+    path('hod/course/delete/<int:id>',Hod_views.COURSE_DELETE,name="course_delete")
 
 
   
