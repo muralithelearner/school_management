@@ -65,6 +65,7 @@ def ADD_STUDENT(request):
     }
     return render(request,'Hod/add_student.html',context)
 
+@login_required(login_url='/')
 def VIEW_STUDENT(request):
     student =Student.objects.all()
 
@@ -73,6 +74,7 @@ def VIEW_STUDENT(request):
     }
     return render(request,'Hod/views_student.html',context)
 
+@login_required(login_url='/')
 def EDIT_STUDENT(request,id):
     student = Student.objects.filter(id=id)
     course = Courses.objects.all()
@@ -86,6 +88,7 @@ def EDIT_STUDENT(request,id):
     }
     return render(request,'Hod/edit_student.html',context)
 
+@login_required(login_url='/')
 def UPDATE_STUDENT(request):
     if request.method =='POST':
 
@@ -131,6 +134,7 @@ def UPDATE_STUDENT(request):
 
     return render(request,'Hod/edit_student.html')
 
+@login_required(login_url='/')
 def DELETE_STUDENT(request,admin):
     student =CustomUser.objects.get(id=admin)
     student.delete()
@@ -143,7 +147,7 @@ def DELETE_STUDENT(request,admin):
 #     student.delete()
 #     messages.success(request,'succefully deleted')
 #     return redirect(VIEW_STUDENT)
-
+@login_required(login_url='/')
 def ADD_COURSE(request):
     if request.method == 'POST':
         course_name = request.POST.get('course_name')
@@ -156,6 +160,7 @@ def ADD_COURSE(request):
         return redirect(ADD_COURSE)
     return render(request,'Hod/add_course.html')
 
+@login_required(login_url='/')
 def COURSE_VIEW(request):
     course = Courses.objects.all()
     context = {
@@ -164,6 +169,7 @@ def COURSE_VIEW(request):
     return render(request,'Hod/course_view.html',context)
 
 
+@login_required(login_url='/')
 def EIDT_COURSE(request,id):
     course =Courses.objects.get(id=id)
     context ={
@@ -171,6 +177,7 @@ def EIDT_COURSE(request,id):
     }
     return render(request,'Hod/course_edit.html',context)
 
+@login_required(login_url='/')
 def UPDATE_COURSE(request,id):
     course =Courses.objects.get(id=id)
     if request.method =='POST':
@@ -196,12 +203,14 @@ def UPDATE_COURSE(request,id):
 #             'course': course
 #         }
 #         return render(request, 'Hod/course_edit.html', context)
- 
+
+@login_required(login_url='/')
 def COURSE_DELETE(request,id):
     course =Courses.objects.get(id=id)
     course.delete()
     return redirect('course_view')
 
+@login_required(login_url='/')
 def ADD_STAFF(request):
     if request.method =='POST':
         profile_pic =request.FILES.get('profile_pic')
@@ -243,6 +252,7 @@ def ADD_STAFF(request):
 
     return render(request,'Hod/add_staff.html')
 
+@login_required(login_url='/')
 def VIEWS_STAFF(request):
     staff =Staff.objects.all()
 
@@ -251,6 +261,7 @@ def VIEWS_STAFF(request):
     }
     return render(request,'Hod/staff_views.html',context)
 
+@login_required(login_url='/')
 def EDIT_STAFF(request,id):
     staff = Staff.objects.get(id = id)
     context ={
@@ -258,6 +269,7 @@ def EDIT_STAFF(request,id):
     }
     return render(request,'Hod/edit_staff.html',context)
 
+@login_required(login_url='/')
 def UPDATE_STAFF(request):
     if request.method =='POST':
         staff_id=request.POST.get('staff_id')
@@ -292,12 +304,14 @@ def UPDATE_STAFF(request):
 
     return render(request,'Hod/edit_staff.html')
 
+@login_required(login_url='/')
 def HOD_VIEWS(request,admin):
     staff = CustomUser.objects.get(id=admin)
     staff.delete()
     messages.warning(request,'staff succefully delete')
     return redirect(VIEWS_STAFF)
 
+@login_required(login_url='/')
 def ADD_SUBJECT(request):
     course =Courses.objects.all()
     staff = Staff.objects.all()
@@ -324,3 +338,52 @@ def ADD_SUBJECT(request):
         'staff' : staff
     }
     return render(request,'Hod/add_subject.html',context)
+
+@login_required(login_url='/')
+def VIEW_SUBJECT(request):
+    subject =Subject.objects.all()
+
+
+    context ={
+        'subject' : subject
+    }
+    return render(request,'Hod/view_subject.html',context)
+
+@login_required(login_url='/')
+def EDIT_SUBJECT(request,id):
+    subject = Subject.objects.get(id=id)
+    course = Courses.objects.all()
+    staff =Staff.objects.all()
+
+    context ={
+        'subject' : subject,
+        'course' : course,
+        'staff' : staff
+    }
+    return render(request,'Hod/edit_subject.html',context)
+
+def UPDATE_SUBJECT(request):
+    if request.method == 'POST':
+        subject_id =request.POST.get('subject_id')
+        subject_name =request.POST.get('subject_name')
+        course_id =request.POST.get('course_id')
+        staff_id =request.POST.get('staff_id')
+        
+        course = Courses.objects.get(id=course_id)
+        staff =Staff.objects.get(id=staff_id)
+
+        subject =Subject.objects.get(id=subject_id)
+        subject.name=subject_name
+        subject.course=course
+        subject.staff=staff
+        subject.save()
+        messages.success(request,'update succefully')
+        return redirect('view_subject')
+
+    return render(request,'Hod/edit_subject.html')
+
+def DELETE_SUBJECT(request,id):
+    subject = Subject.objects.get(id=id)
+    subject.delete()
+    messages.warning(request,'succefully delete subject')
+    return redirect(VIEW_SUBJECT)

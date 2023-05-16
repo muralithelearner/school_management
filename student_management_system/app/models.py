@@ -41,8 +41,8 @@ class Student(models.Model):
 
     adress =models.TextField()
     gender =models.CharField(max_length=50)
-    course_id =models.ForeignKey(Courses,on_delete=models.DO_NOTHING)
-    session_id= models.ForeignKey(Session_Year,on_delete=models.DO_NOTHING)
+    course_id =models.ForeignKey(Courses,on_delete=models.CASCADE)
+    session_id= models.ForeignKey(Session_Year,on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
@@ -63,7 +63,7 @@ class Staff(models.Model):
     
 class Subject(models.Model):
     name = models.CharField(max_length=100)
-    course =models.ForeignKey(Courses,on_delete=models.DO_NOTHING)
+    course =models.ForeignKey(Courses,on_delete=models.CASCADE)
     staff =models.ForeignKey(Staff,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)

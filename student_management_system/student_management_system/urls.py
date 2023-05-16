@@ -57,7 +57,15 @@ urlpatterns = [
     # path('hod/course/update/',Hod_views.UPDATE_COURSE,name='update_course'),
     path('hod/course/update/<int:id>/',Hod_views.UPDATE_COURSE,name='update_course'),
     path('hod/course/delete/<int:id>',Hod_views.COURSE_DELETE,name="course_delete"),
-    path('hod/subject/add',Hod_views.ADD_SUBJECT,name='add_subject')
+
+
+    path('hod/subject/add',Hod_views.ADD_SUBJECT,name='add_subject'),
+    path('hod/subject/view',Hod_views.VIEW_SUBJECT,name='view_subject'),
+    path('hod/subject/edit/<int:id>',Hod_views.EDIT_SUBJECT,name='edit_subject'),
+    path('hod/subject/update',Hod_views.UPDATE_SUBJECT,name="update_subject"),
+    path('hod/subject/delete/<int:id>',Hod_views.DELETE_SUBJECT,name="delete_subject"),
+
+
 
 
   
