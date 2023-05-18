@@ -65,6 +65,11 @@ urlpatterns = [
     path('hod/subject/update',Hod_views.UPDATE_SUBJECT,name="update_subject"),
     path('hod/subject/delete/<int:id>',Hod_views.DELETE_SUBJECT,name="delete_subject"),
 
+    path('hod/session/add',Hod_views.ADD_SESSION,name='add_session'),
+    path('hod/session/view',Hod_views.VIEW_SESSION,name='view_session'),
+    path('hod/session/edit/<int:id>',Hod_views.EDIT_SESSION,name='edit_session'),
+    path('hod/session/update',Hod_views.UPDATE_SESSION,name='update_session'),
+    path('hod/session/delete/<int:id>',Hod_views.DELETE_SESSION,name='delete_session')
 
 
 

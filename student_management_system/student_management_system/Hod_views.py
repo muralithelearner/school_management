@@ -362,6 +362,7 @@ def EDIT_SUBJECT(request,id):
     }
     return render(request,'Hod/edit_subject.html',context)
 
+@login_required(login_url='/')
 def UPDATE_SUBJECT(request):
     if request.method == 'POST':
         subject_id =request.POST.get('subject_id')
@@ -382,8 +383,64 @@ def UPDATE_SUBJECT(request):
 
     return render(request,'Hod/edit_subject.html')
 
+@login_required(login_url='/')
 def DELETE_SUBJECT(request,id):
     subject = Subject.objects.get(id=id)
     subject.delete()
     messages.warning(request,'succefully delete subject')
     return redirect(VIEW_SUBJECT)
+
+def ADD_SESSION(request):
+    if request.method == 'POST':
+        session_start =request.POST.get('session_start')
+        session_end = request.POST.get('session_end')
+
+        session = Session_Year(
+            session_start =session_start,
+            session_end = session_end
+        )
+        session.save()
+        messages.success(request,'session  add succefully')
+        return redirect(ADD_SESSION)
+    return render(request,'Hod/add_session.html')
+
+def VIEW_SESSION(request):
+    session = Session_Year.objects.all()
+
+    context ={
+        'session': session
+    }
+    return render(request,'Hod/view_session.html',context)
+
+
+def EDIT_SESSION(request,id):
+    session = Session_Year.objects.filter(id=id)
+
+    context ={
+        'session': session
+    }
+    return render(request,'Hod/edit_session.html',context)
+
+from django.shortcuts import get_object_or_404
+
+def UPDATE_SESSION(request):
+    if request.method =="POST":
+        session_id=request.POST.get('session_id')
+        session_start =request.POST.get('session_start')
+        session_end= request.POST.get('session_end')
+
+        session = Session_Year.objects.get(id=session_id)
+        session.session_start=session_start
+        session.session_end=session_end
+        session.save()
+        messages.success(request,'session update succefully')
+        return redirect(VIEW_SESSION)
+
+    return redirect(request,'Hod/edit_session.html')
+
+
+def DELETE_SESSION(request,id):
+    session =Session_Year.objects.get(id=id)
+    session.delete()
+    messages.warning(request,'delete session sucessfully')
+    return redirect(VIEW_SESSION)
