@@ -69,11 +69,11 @@ urlpatterns = [
     path('hod/session/view',Hod_views.VIEW_SESSION,name='view_session'),
     path('hod/session/edit/<int:id>',Hod_views.EDIT_SESSION,name='edit_session'),
     path('hod/session/update',Hod_views.UPDATE_SESSION,name='update_session'),
-    path('hod/session/delete/<int:id>',Hod_views.DELETE_SESSION,name='delete_session')
+    path('hod/session/delete/<int:id>',Hod_views.DELETE_SESSION,name='delete_session'),
 
 
-
-  
+    # staff login
+    path('staff/home',staff_views.STAFF_HOME,name='staff_home')
 
     # write like this also
     # path('hod/student/delete/<str:id>',Hod_views.DELETE_STUDENT,name='student_delete')
