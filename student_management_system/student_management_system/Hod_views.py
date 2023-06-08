@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from app.models import Courses,Session_Year,CustomUser,Student,Staff,Subject
+from app.models import Courses,Session_Year,CustomUser,Student,Staff,Subject,Staff
 from django.contrib import messages
 
 
@@ -461,3 +461,11 @@ def DELETE_SESSION(request,id):
     session.delete()
     messages.warning(request,'delete session sucessfully')
     return redirect(VIEW_SESSION)
+
+def STAFF_SEND_NOTIFICATIONS(request):
+    staff = Staff.objects.all()
+
+    context ={
+        'staff' : staff
+    }
+    return render(request,'Hod/staff_notifications.html',context)

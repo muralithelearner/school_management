@@ -71,8 +71,10 @@ urlpatterns = [
     path('hod/session/update',Hod_views.UPDATE_SESSION,name='update_session'),
     path('hod/session/delete/<int:id>',Hod_views.DELETE_SESSION,name='delete_session'),
 
+    path('hod/staff/send_notification',Hod_views.STAFF_SEND_NOTIFICATIONS,name='staff_notification'),
 
-    # staff login
+
+    # staff urls
     path('staff/home',staff_views.STAFF_HOME,name='staff_home')
 
     # write like this also

@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+       <div class="page-header">
+          <div class="row align-items-center">
+             <div class="col">
+                <h3 class="page-title">STAFF</h3>
+                <ul class="breadcrumb">
+                  <!-- breadcrumb navigations -->
+                   <li class="breadcrumb-item"><a href="index.html">DASHBOARD</a></li>
+                   <li class="breadcrumb-item active">Staff</li>
+                </ul>
+             </div>
+             
+             <!-- class=auto parellael with continer fluid -->
+             <div class="col-auto text-right float-right ml-auto">   
+                <!-- Button to Open the Modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                View all notification
+            </button>
+                <!-- <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> -->
+                <!-- <a href="add-student.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>  -->
+             </div>
+          </div>
+          {% include 'includes/messages.html'%}
+       </div>
+       <div class="row">
+          <div class="col-sm-12">
+            <!-- class cards card-table for more usefull in tables  from bootstrap-->
+            <!-- without card table asction not fit properly when data is too more then column   -->
+             <div class="card card-table">  
+                <div class="card-body">
+                   <div class="table-responsive">
+                      <table id="table_id" class="table table-hover table-center mb-0 ">
+                         <thead>
+                            
+                            <tr>
+                               <th>ID</th>
+                               <th>Name</th>
+                               <th>Email</th>
+                              
+                               <th class="text-right">Action</th>
+                            </tr>
+                         </thead>
+                         <tbody>
+                            {% for i in staff %}
+                            <tr>
+                               <td>{{i.id}}</td>
+                               <td>
+                                  <h2 class="table-avatar">
+                                     <a href="student-details.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="/{{i.admin.profile_pic}}" alt="User Image"></a>
+                                     <a href="student-details.html">{{i.admin.first_name}}&nbsp;{{i.admin.last_name}}</a>
+                                  </h2>
+                               </td>
+                               <td>{{i.admin.email}}</td>
+                              
+                               <td class="text-right">
+                                  <div class="actions">
+
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#send_notification">
+                                        Send Notification
+                                    </button>
+                                    
+                                   <!-- <button class="btn btn-success">Send notification</button> -->
+                                  </div>
+                               </td>
+                            </tr>
+                            {% endfor %}
+                         </tbody>
+                      </table>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>   
+
+ <!-- view all staff notification -->
+
+ <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          Modal body..
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+ 
+  <!-- send Notification -->
+
+  <div class="modal" id="send_notification">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          Modal body..
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+{%  endblock %}
