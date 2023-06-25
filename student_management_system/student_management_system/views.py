@@ -44,7 +44,7 @@ def doLogin(request):
                 return redirect('staff_home')
             elif user_type =='3':
                 pass
-                # return redirect('staff_home')
+                return redirect('staff_home')
             else:
                 messages.error(request,'Email or Password are Invalid')
                 return redirect('login')

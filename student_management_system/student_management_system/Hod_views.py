@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from app.models import Courses,Session_Year,CustomUser,Student,Staff,Subject,Staff
+from app.models import Courses,Session_Year,CustomUser,Student,Staff,Subject,Staff,Staff_Notification
 from django.contrib import messages
 
 
@@ -464,8 +464,24 @@ def DELETE_SESSION(request,id):
 
 def STAFF_SEND_NOTIFICATIONS(request):
     staff = Staff.objects.all()
+    see_notifications = Staff_Notification.objects.all().order_by('-id')
 
     context ={
-        'staff' : staff
+        'staff' : staff,
+        'see_notifications' : see_notifications
     }
     return render(request,'Hod/staff_notifications.html',context)
+
+def SAVE_STAFF_NOTIFICATION(request):
+    if request.method =='POST':
+        staff_id = request.POST.get('staff_id')
+        message = request.POST.get('message')
+
+        staff = Staff.objects.get(admin = staff_id)
+        notification =Staff_Notification(
+            staff_id=staff,
+            messages =message
+        )
+        notification.save()
+        messages.success(request,'notification are sent succefully')
+        return redirect(STAFF_SEND_NOTIFICATIONS)
